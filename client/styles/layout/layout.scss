@@ -1,0 +1,377 @@
+nav {
+    z-index: 10000;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    //padding: 10px 0;
+    width: 100%;
+    overflow: visible;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1100px;
+}
+
+.white-nav {
+    position: absolute;
+    //background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    background-color: rgba(0,0,0,0.4);
+}
+
+nav div img {
+    width: 30px;
+    margin-right: 10px;
+}
+
+nav > div {
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+}
+
+nav a {
+    color: #444;
+    padding: 10px 10px;
+}
+
+.white-nav li a {
+    color: white;
+}
+
+.white-nav * {
+    fill: white;
+}
+
+nav ul {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+nav ul, .nav p {
+    font-weight: 300;
+    font-size: 16px;
+    opacity: 1;
+    color: #444;
+}
+
+nav li {
+    margin-left: 10px;
+    height: auto;
+    overflow: auto;
+    width: auto;
+    overflow: hidden;
+    display: inline-block;
+}
+
+nav li img {
+    width: 15px;
+}
+
+.footer {
+    z-index: 100000;
+}
+
+.nav-dropdown {
+    width: 150px;
+    height: auto;
+    background-color: white;
+    position: absolute;
+    right: 0;
+    justify-content: flex-end;
+    top: 75px;
+    border-radius: 3px;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.15);
+    z-index: 2000;
+    display: none;
+}
+
+.nav-dropdown ul {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.nav-dropdown li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: block;
+    float: right;
+    color: #444 !important;
+}
+
+.nav-dropdown a {
+    color: #444 !important;
+}
+
+.nav-dropdown::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin-left: 61px;
+    top: 2px;
+    z-index: 10;
+    left: 50%;
+    box-sizing: border-box;
+    border: 6px solid black;
+    border-color: transparent transparent white white;
+    transform-origin: 0 0;
+    transform: rotate(135deg);
+    box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.join-nav-button {
+    background-color: #69F0AE;
+    border-radius: 4px;
+    display: table;
+    color: white !important;
+    font-weight: 300;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.join-nav-button a {
+    padding-left: 40px;
+    padding-right: 40px;
+    display: table;
+}
+
+.nav-menu-button-container {
+    width: 45px;
+    height: 45px;
+    position: relative;
+    top: -2px;
+    opacity: 0.7;
+}
+
+.nav-menu-button {
+    width: 45px;
+    height: 45px;
+    position: relative;
+}
+
+.nav-button-wrapper {
+    cursor: pointer;
+    display: block;
+    height: 45px;
+    width: 45px;
+    border: 0;
+    padding: 0;
+    z-index: 100000;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.nav-dark svg, .nav-white svg {
+    fill: #444;
+    stroke: #444;
+    transition: all 0.4s ease-in-out;
+}
+
+nav svg * {
+    transition: all 0.4s ease-in-out;
+}
+
+.nav-white-logo nav svg * {
+    stroke: #fff;
+}
+
+.nav-white-logo .nav-menu-button-container svg * {
+    fill: #fff;
+}
+
+.nav-white-log nav .nav-ab nav {
+    position: absolute;
+    background-color: transparent;
+}
+
+.nav-menu-button {
+    display: none;
+}
+
+.gh-svg {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    fill: black;
+}
+
+.gh-svg-rect {
+    left: 0;
+    top: 0;
+    transform-origin: 50% 50%;
+    transition: transform 0.08s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+}
+
+.common-button, .common-button-teal {
+    color: white;
+    background-color: #69F0AE;
+    padding: 11px 35px;
+    display: table;
+    width: auto;
+    border-radius: 4px;
+    position: relative;
+    margin: 15px auto 0;
+}
+
+.common-button:active, .common-button-teal:active {
+    top: 1px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.common-button-teal {
+    color: white;
+    background-color: #1DE9B6;
+}
+
+.loading-gif {
+    background-color: rgba(255, 255, 255, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1000000000;
+}
+
+.logbox-loading {
+    color: white;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+}
+
+.fa-spin-fast {
+    -webkit-animation: fa-spin 0.5s infinite linear;
+    animation: fa-spin 0.5s infinite linear;
+}
+
+.fa-spin-slow {
+    -webkit-animation: fa-spin 1.3s infinite linear;
+    animation: fa-spin 1.3s infinite linear;
+}
+
+.main-wrapper {
+    height: auto;
+    padding: 0;
+}
+
+.footer {
+    width: 100%;
+    height: auto;
+    padding: 80px 0 50px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+}
+
+.footer-logo-container p {
+    font-size: 12px;
+    color: #444;
+    font-family: "Droid Sans";
+}
+
+.footer-logo-container img {
+    width: 20px;
+    margin-bottom: 12px;
+}
+
+.footer-logo-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.2;
+    margin-top: 50px;
+}
+
+.footer-logo-container > div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer-wrapper h4 {
+    font-weight: 700;
+    font-size: 14px;
+    color: #444;
+    opacity: 0.9;
+    font-family: "Droid Sans";
+}
+
+.footer-wrapper ul {
+    margin-top: 10px;
+}
+
+.footer-wrapper li {
+    margin-bottom: 5px;
+}
+
+.footer-wrapper a {
+    color: #444;
+    font-size: 16px;
+    font-weight: 300;
+    opacity: 0.5;
+    font-family: "Droid Sans";
+}
+
+.footer-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    width: 600px;
+    max-width: 90%;
+}
+
+.fourzerofour {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+}
+
+.fourzerofour > div {
+    margin-top: 150px;
+}
+
+.fourzerofour h1 {
+    font-weight: 700;
+    text-align: center;
+    font-size: 90px;
+}
+
+.fourzerofour p {
+    text-align: center;
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+.fourzerofour a {
+    display: table;
+    margin: 30px auto 0;
+    padding: 15px 30px;
+    background-color: #444;
+    color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-size: 13px;
+}
