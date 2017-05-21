@@ -52,7 +52,7 @@ export default class NotesLayout extends React.Component {
 								<div className="nav-links">
 									<Link to="/notes">All Notes</Link>
 									<Link to="/notes/new">New Note</Link>
-									<Link to="/notes/settings">Settings</Link>
+									{/*<Link to="/notes/settings">Settings</Link>*/}
 									<Link target="__blank" to="/search">Search
 										<img src="/client/images/link-away.svg" alt=""/></Link>
 								</div>

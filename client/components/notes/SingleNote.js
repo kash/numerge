@@ -20,7 +20,7 @@ export default class Login extends React.Component {
 			var trimmedString = text.substr(0, 200);
 			text = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))) + "...";
 		}
-
+		console.log('hi');
 		let date = new Date(this.props.info.timecreated);
 		date = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Result from './Result';
+import SingleNote from '../notes/SingleNote';
 import axios from 'axios';
 
 export default class Search extends React.Component {
@@ -15,11 +15,32 @@ export default class Search extends React.Component {
 		this.setState({
 			[key]: value
 		});
-		axios.post('/requestSearch', {
-			search: value
-		}).then(function(response){
-			console.log(response);
-		})
+		if (!value){
+			this.setState({
+				output: null
+			})
+		}else{
+			axios.post('/requestSearch', {
+				search: value
+			}).then(function(response){
+				if (response.data.empty){
+					this.setState({
+						output: null
+					})
+				}else{
+					let output = [];
+					for (let i in response.data){
+						output.push(
+							<SingleNote info={response.data[i]}/>
+						)
+					}
+					this.setState({
+						output: output
+					})
+				}
+
+			}.bind(this))
+		}
 	}
 
 	render() {
