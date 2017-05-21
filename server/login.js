@@ -7,7 +7,9 @@
 
 let passwordHash = require('password-hash');
 let mysql = require('mysql');
-
+//for rand generated strings
+let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+let text = "";
 let userJoinRequest = function() {
     app.post('/userJoinRequest', function(req, res){
         //variables
@@ -17,26 +19,32 @@ let userJoinRequest = function() {
                 let sql = `SELECT username FROM users WHERE email = ?`;
                 connection.query(sql, [username], function(err, rows, fields){
                     if (rows[0].username == null){
-                        let sql = `INSERT INTO users SET email = ?, username = ?, password = ?`
+                        let sql = `INSERT INTO users SET email = ?, username = ?, password = ?, uuid = ?`
                         let email = req.body.email
                         let password = req.body.password
                         let username = req.body.username
+                        let uuid = function (){
+                            for( var i=0; i < 5; i++ )
+                                text += possible.charAt(Math.floor(Math.random() * possible.length));
+                            return text;
+                        }
                         //Hash passwords
                         let hashedPassword = passwordHash.generate(password);
-                        connection.query(sql, [email, username, hashedPassword], function (err){
+                        connection.query(sql, [email, username, hashedPassword, uuid], function (err){
                             if (err) throw err;
                             console.log("Unable to write to DB email, user, or password")
                         });
+                        ('uuid', uuid(), { maxAge: 90000, httpOnly: true });
                     }else{
-                        res.json{
+                        res.json({
                             error: "email"
-                        }
+                        })
                     }
                 })
             }else{
-                res.json{
+                res.json({
                     error: "username"
-                }
+                })
             }
         })
     });
@@ -53,12 +61,13 @@ let userLoginRequest = function(){
         connection.query(sql, [email], function(err, rows, fields){
             let dbPassword = rows[0].password
             if (hashedPassword === dbPassword)
-                res.json{
-                error: null
+                res.json({
+                    error: null
+                })
             }else{
-                res.json{
+                res.json({
                     error: "password"
-                }
+                })
             }
         })
 
