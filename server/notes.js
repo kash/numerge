@@ -115,21 +115,22 @@ let makeNotePublic = function () {
                     sql = `DELETE FROM notes WHERE id = ?`
                     connection.query(sql, [noteid])
                 }
-
             })
         }
     })
 }
+
+let noteViewsIncrement = function () {
+    app.use('/noteViewsIncrement', function(res, req) {
+        id = req.body.id
+        let sql = `UPDATE notes SET views = views + 1 WHERE id = ? `
+        connection.query(sql, [id])
+    })
+}
+
 module.exports = {
-<<<<<<< HEAD
     createNewNote: createNewNote(),
     fetchAllUserNotes: fetchAllUserNotes(),
     modifyNote: modifyNote(),
     makeNotePublic: makeNotePublic()
-=======
-	createNewNote: createNewNote(),
-	fetchAllUserNotes: fetchAllUserNotes(),
-	modifyNote: modifyNote(),
-	makeNotePublic: makeNotePublic()
->>>>>>> client
 }
