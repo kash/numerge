@@ -5,8 +5,8 @@ let requestSearch = function () {
         let searchPost = searchPre.split(" ")
         for (let searching in searchPost){
             let searchString = searchpost[searching]
-            let sql = `SELECT * FROM notes WHERE tags LIKE %?%`
-            connection.query(sql, [searchString], function(err, rows, fields){
+            let sql = `SELECT * FROM notes WHERE tags LIKE %?% OR title LIKE %?% AND public = 1`
+            connection.query(sql, [searchString, searchString], function(err, rows, fields){
                 if (rows.length > 0){
                     let output = [];
                     for (let k in rows){
@@ -22,10 +22,4 @@ let requestSearch = function () {
             })
         }
     })
-}
-let search = "css 162 recursion"
-console.log("Search:", search)
-let splitString = search.split(" ")
-for (let searching in splitString){
-    console.log(splitString[searching])
 }
