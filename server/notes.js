@@ -71,6 +71,35 @@ let modifyNote = function () {
 	})
 }
 
+let fetchSingleNote = function(){
+	app.post('/fetchSingleNote', function (req, res) {
+		let userid = req.body.userID
+		let sql = `SELECT id, title, text, uuid, tags, timecreated, public, draft FROM notes WHERE userid = ?`
+		connection.query(sql, [userid], function (err, rows, fields) {
+			let output = [];
+			if (rows.length > 0) {
+				for (let s in rows) {
+					let i = rows[s];
+					let temp = {
+						title: i['title'],
+						id: i['id'],
+						text: i['text'],
+						tags: i['tags'],
+						uuid: i['uuid'],
+						timecreated: i['timecreated'],
+						publicNote: i['public'],
+						draft: i['draft']
+					}
+					output.push(temp);
+				}
+				res.json(output);
+			} else {
+				res.json(null)
+			}
+		});
+	});
+}
+
 let makeNotePublic = function () {
 	app.post('/makeNotePublic', function (req, res) {
 		let noteid = req.body.id
