@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
-@connect(function(store){
+@connect(function (store) {
 	return {
 		info: store.user.info
 	}
@@ -15,7 +15,7 @@ export default class NavigationBar extends React.Component {
 
 	render() {
 		let img = "/client/images/logo.png";
-		if (this.props.whiteNav){
+		if (this.props.whiteNav) {
 			img = "/client/images/logo-white.png";
 		}
 
@@ -26,12 +26,15 @@ export default class NavigationBar extends React.Component {
 				<li><Link to={"/join"}>Join</Link></li>
 			</ul>
 		);
-		console.log(this.props);
-		if (this.props.info.firstname > 0){
-			<ul className="nav-ul">
-				<li><Link to={"/about"}>About</Link></li>
-				<li><Link to={"/notes"}>Notes</Link></li>
-			</ul>
+		console.log(this.props.info);
+
+		if (!this.props.info.error) {
+			links = (
+				<ul className="nav-ul">
+					<li><Link to={"/about"}>About</Link></li>
+					<li><Link to={"/notes"}>Notes</Link></li>
+				</ul>
+			)
 		}
 		return (
 			<nav className={this.props.whiteNav ? "white-nav" : null}>

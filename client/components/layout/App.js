@@ -16,7 +16,7 @@ export default class App extends React.Component {
 	}
 
 	componentWillMount() {
-		// this.props.dispatch(fetchUserInformation());
+		this.props.dispatch(fetchUserInformation());
 	}
 
 	render() {

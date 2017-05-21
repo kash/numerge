@@ -6,7 +6,7 @@ import {browserHistory} from 'react-router';
 
 @connect(function (store) {
 	return {
-		user: store.user
+		info: store.user.info
 	}
 })
 
@@ -18,6 +18,7 @@ export default class Join extends React.Component {
 			password: "",
 			confirm: "",
 			error: "",
+			username: "",
 			pass8: false,
 			passNum: false,
 			passCap: false
@@ -46,23 +47,30 @@ export default class Join extends React.Component {
 			if (this.state.password === this.state.confirm) {
 				axios.post('/userJoinRequest', {
 					email: this.state.email,
-					password: this.state.password
+					password: this.state.password,
+					username: this.state.username
 				}).then(function (response) {
-					switch (response.data) {
+					switch (response.data.error) {
 						case "username":
+							this.setState({
+								error: "This username is already associated with an account"
+							})
 							break;
 						case "email":
+							this.setState({
+								error: "This email is already associated with an account"
+							});
 							break;
 						case null:
-							this.setState({})
+							browserHistory.push('/notes');
 							break;
 						default:
-							this.setState({erorr: "Something went wrong.. Please refresh page and try again"})
+							this.setState({error: "Something went wrong.. Please refresh page and try again"})
 							break;
 
 					}
 					console.log(response);
-				});
+				}.bind(this));
 			} else {
 				this.setState({error: "Passwords do not match"});
 			}
@@ -74,8 +82,8 @@ export default class Join extends React.Component {
 	}
 
 	render() {
-		if (Object.keys(this.props.user.info).length == 0) {
-			if (this.props.user.info.error){
+		if (Object.keys(this.props.info).length > 0) {
+			if (!this.props.info.error) {
 				browserHistory.push('/notes');
 			}
 		}
@@ -105,11 +113,18 @@ export default class Join extends React.Component {
 							   value={this.state.email}/>
 					</div>
 					<div>
+						<legend>Username</legend>
+						<input type="text"
+							   onChange={(e) => this.handleChange("username", e.target.value)}
+							   value={this.state.username}/>
+					</div>
+					<div>
 						<legend>Password</legend>
 						<input type="password"
 							   onChange={(e) => this.handleChange("password", e.target.value)}
 							   value={this.state.password}/>
 					</div>
+
 					<div>
 						<legend>Confirm Password</legend>
 						<input type="password"

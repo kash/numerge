@@ -11,9 +11,9 @@ let createNewNote = function () {
 		let draft = 1
 		let public = 0
 
-		connection.query(sql, [userid, title, tags, text, timeCreated, draft, public], function (err, rows, fields) {
-			sql = `SELECT id FROM notes WHERE userid = ? ORDER BY timecreated DESC`;
 
+		connection.query(sql, [userid, title, tags, text, timeCreated, draft, public], function (err, rows, fields) {
+			sql = `SELECT id FROM notes WHERE userid = ? ORDER BY timecreated DESC LIMIT 1`;
 			connection.query(sql, [userid], function (err, rows, fields) {
 				res.json({
 					id: rows[0].id
@@ -49,14 +49,13 @@ let fetchAllUserNotes = function () {
 				modified.push(modTemp);
 			}
 
-			res.json{
+			res.json({
 				"title": title,
 				"text": text,
 				"tags": tags,
 				"timecreated": timecreated,
 				"modified": modified
-			}
-
+			})
 		})
 	})
 }
@@ -97,7 +96,6 @@ let makeNotePublic = function () {
 					connection.query(sql, [idTemp, idTemp])
 				}
 			})
-
 		}
 	})
 }

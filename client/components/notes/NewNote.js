@@ -1,4 +1,12 @@
 import React from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
+
+@connect(function (store) {
+	return {
+		userInfo: store.user.info
+	}
+})
 
 export default class NewNote extends React.Component {
 	constructor() {
@@ -6,14 +14,41 @@ export default class NewNote extends React.Component {
 		this.state = {
 			text: "",
 			title: "",
-			tags: ""
+			tags: "",
+			firstSave: false,
+			id: null
 		}
 	}
 
-	handleChange(key, value){
+	handleChange(key, value) {
 		this.setState({
 			[key]: value
 		})
+		if (!this.state.firstSave) {
+			this.setState({
+				firstSave: true
+			});
+			axios.post('/createNewNote', {
+				userid: this.props.userInfo.id,
+				text: this.state.text,
+				title: this.state.title,
+				tags: this.state.tags
+			}).then(function (response) {
+				this.setState({id: response.data.id});
+			}.bind(this));
+
+
+			setInterval(function () {
+				axios.post('/modifyPost', {
+					userid: this.props.userInfo.id,
+					text: this.state.text,
+					title: this.state.title,
+					tags: this.state.tags,
+					id: this.state.id
+				});
+				console.log('hi');
+			}.bind(this), 1000);
+		}
 	}
 
 	render() {
@@ -24,7 +59,7 @@ export default class NewNote extends React.Component {
 				<input placeholder="Tags" type="text" onChange={(e) => this.handleChange("tags", e.target.value)}/>
 				<textarea onChange={(e) => this.handleChange("text", e.target.value)}
 						  value={this.state.text}
-				placeholder="Note"></textarea>
+						  placeholder="Note"></textarea>
 			</div>
 		)
 	}
