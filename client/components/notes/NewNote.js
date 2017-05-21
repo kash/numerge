@@ -91,6 +91,8 @@ export default class NewNote extends React.Component {
 			)
 		}
 
+		let tags = this.state.tags
+
 		return (
 			<div className="new-note notes">
 				{header}

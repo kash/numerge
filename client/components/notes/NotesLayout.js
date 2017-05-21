@@ -31,7 +31,6 @@ export default class NotesLayout extends React.Component {
 	}
 
 	logOut() {
-		console.log("hi1");
 		axios.post('/logUserOut').then(function(){
 			browserHistory.push('/');
 		});

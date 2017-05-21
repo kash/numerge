@@ -24,6 +24,8 @@ export default class Login extends React.Component {
 		let date = new Date(this.props.info.timecreated);
 		date = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
 
+		
+
 		return (
 			<Link to={"/notes/" + this.props.info.uuid} className="single-note">
 				<div className="first-line">
