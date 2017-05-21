@@ -44,6 +44,14 @@ let fetchUserInformation = function () {
 	});
 }
 
+let logUserOut = function() {
+	app.post('/logUserOut', function (req, res) {
+		res.cookie('uuid', '', {expires: new Date(0)});
+		res.end();
+	});
+}
+
 module.exports = {
-	fetchUserInformation: fetchUserInformation()
+	fetchUserInformation: fetchUserInformation(),
+	logUserOut: logUserOut()
 }

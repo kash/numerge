@@ -39,7 +39,7 @@
                     color: white;
                     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 
-                    img{
+                    img {
                         display: flex;
                         width: 14px;
                         filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.20));
@@ -90,7 +90,7 @@
     }
 
     .new-note {
-        h1{
+        h1 {
             margin-bottom: 50px !important;
         }
         textarea, input {
@@ -107,19 +107,69 @@
             background: transparent;
         }
 
-        input{
+        input {
             min-height: 0;
             margin-top: 0;
             padding: 20px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
     }
 
     .all-notes {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: flex !important;
+        flex-direction: column;
         width: 100%;
+
+        .single-note {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            padding: 20px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+            *{
+                word-break: break-all;
+            }
+
+            .first-line {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+            .tags {
+                display: flex;
+                flex-direction: row;
+            }
+            .created{
+                font-size: 14px;
+                margin-top: 18px;
+            }
+            .tags > div {
+                background-color: #448AFF;
+                padding: 5px 10px;
+                border-radius: 14px;
+                margin-left: 5px;
+                font-size: 15px;
+                opacity: 0.8;
+                color: white;
+            }
+
+            p {
+                opacity: 0.7;
+                margin-top: 10px;
+            }
+
+            h2 {
+                color: #444;
+                margin-right: 10px;
+                opacity: 0.95;
+                font-size: 22px;
+            }
+        }
 
         .empty-notes {
             display: flex;

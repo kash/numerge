@@ -23,15 +23,19 @@ export default class App extends React.Component {
 		let route = this.props.route;
 		let nav = route.hideNav ? null : <NavigationBar/>;
 		let footer = route.hideFooter ? null : <Footer/>;
-		if (route.whiteNav && nav != null){
+		if (route.whiteNav && nav != null) {
 			nav = <NavigationBar whiteNav="true"/>
 		}
-		return (
-			<div className={this.props.route.appClassName}>
-				{nav}
-				{this.props.children}
-				{footer}
-			</div>
-		)
+		if (Object.keys(this.props.info).length > 0) {
+			return (
+				<div className={this.props.route.appClassName}>
+					{nav}
+					{this.props.children}
+					{footer}
+				</div>
+			)
+		}else{
+			return null;
+		}
 	}
 }

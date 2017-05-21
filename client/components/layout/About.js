@@ -22,7 +22,9 @@ export default class About extends React.Component {
 					<p>Notes a categorized using tagging. For example, a note tagged as
 						#school/biology/anatomy would show up any time someone searches
 						for school, biology, or anatomy.</p>
-					<p>Created using Javascript and love. At <a href="https://codeday.org">Code Day</a>. By Kash Goudarzi and Gifton Okoronkwo.</p>
+					<p>Created using Javascript and love. At
+						<a href="https://codeday.org">Code Day</a>. By Kash Goudarzi and
+						Gifton Okoronkwo.</p>
 				</div>
 			</div>
 		)
