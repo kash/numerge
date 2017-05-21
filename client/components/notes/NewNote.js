@@ -25,6 +25,9 @@ export default class NewNote extends React.Component {
 			[key]: value
 		})
 		if (!this.state.firstSave) {
+			this.setState({
+				firstSave: true
+			});
 			axios.post('/createNewNote', {
 				userid: this.props.userInfo.id,
 				text: this.state.text,
@@ -33,9 +36,7 @@ export default class NewNote extends React.Component {
 			}).then(function (response) {
 				this.setState({id: response.data.id});
 			}.bind(this));
-			this.setState({
-				firstSave: false
-			});
+
 
 			setInterval(function () {
 				axios.post('/modifyPost', {
@@ -45,9 +46,8 @@ export default class NewNote extends React.Component {
 					tags: this.state.tags,
 					id: this.state.id
 				});
-
 				console.log('hi');
-			}, 1000);
+			}.bind(this), 1000);
 		}
 	}
 
