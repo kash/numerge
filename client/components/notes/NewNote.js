@@ -39,7 +39,7 @@ export default class NewNote extends React.Component {
 
 
 			setInterval(function () {
-				axios.post('/modifyPost', {
+				axios.post('/modifyNote', {
 					userid: this.props.userInfo.id,
 					text: this.state.text,
 					title: this.state.title,

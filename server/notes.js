@@ -74,7 +74,6 @@ let modifyNote = function () {
 let makeNotePublic = function () {
 	app.post('/makeNotePublic', function(req, res){
 		let noteid = req.body.id
-		let public = req.body.public
 		modTemp = new Date().getTime() / 1000;
 		//check public-ness first
 		if (public == true) {
