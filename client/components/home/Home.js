@@ -7,7 +7,7 @@ export default class App extends React.Component {
 		this.state = {
 			topDisplayText: "We believe that note taking shouldn't be a solitary action.  With Numerge, we made note" +
 			" taking collaborative. Search for topics that you want to learn about, and share your own notes on" +
-			" topics you've already noted. Witgh Numerge, note taking has evolved!",
+			" topics you've already noted. With Numerge, note taking has evolved!",
 			displayThis: ""
 		}
 	}

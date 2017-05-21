@@ -18,11 +18,11 @@ export default class About extends React.Component {
 						Numerge is a place where a
 						community of note-takers can come together and share their notes.
 						You can, of course, set your notes to private. But you can (and should!) also
-						share them with the world</p>
+						share them with the world.</p>
 					<p>Notes are categorized using tagging. For example, a note tagged as
 						#school/biology/anatomy would show up any time someone searches
 						for school, biology, or anatomy.</p>
-					<p>Created using Javascript love, and a whole lot of caffeine. At
+					<p>Created using Javascript, love, and a whole lot of caffeine at
 						<a href="https://codeday.org">Code Day</a>. By Kash Goudarzi and
 						Gifton Okoronkwo.</p>
 				</div>
