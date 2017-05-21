@@ -19,7 +19,7 @@ export default class Login extends React.Component {
 	}
 
 	componentDidMount(){
-		if (this.props.state == 'on'){
+		if (this.props.on == 'on'){
 			this.setState({
 				privateSwitch: true
 			})

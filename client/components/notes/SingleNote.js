@@ -20,7 +20,6 @@ export default class Login extends React.Component {
 			var trimmedString = text.substr(0, 200);
 			text = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))) + "...";
 		}
-		console.log('hi');
 		let date = new Date(this.props.info.timecreated);
 		date = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
 
@@ -45,8 +44,23 @@ export default class Login extends React.Component {
 			text = <em>No note</em>;
 		}
 
+		let edit = (
+			<div className="edit-button">
+				<Link to={"/notes/" + this.props.info.uuid} className="edit-button">
+					Edit Note
+				</Link>
+				<button className="delete-button">
+					Delete Note
+				</button>
+			</div>
+
+		)
+		if (!this.props.editable){
+			edit = null;
+		}
+
 		return (
-			<Link to={"/notes/" + this.props.info.uuid} className="single-note">
+			<Link target={this.props.editable ? "" : "__blank"} to={"/note/" + this.props.info.uuid} className="single-note">
 				<div className="first-line">
 					<h2>{title}</h2>
 				</div>
@@ -56,7 +70,7 @@ export default class Login extends React.Component {
 				<div className="single-text">
 					<p>{text}</p>
 				</div>
-
+				{edit}
 				<p className="created">Created {date}</p>
 			</Link>
 		)

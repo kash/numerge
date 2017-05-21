@@ -22,6 +22,7 @@ export default class NavigationBar extends React.Component {
 		let links = (
 			<ul className="nav-ul">
 				<li><Link to={"/about"}>About</Link></li>
+				<li><Link to={"/search"}>Search</Link></li>
 				<li><Link to={"/login"}>Login</Link></li>
 				<li><Link to={"/join"}>Join</Link></li>
 			</ul>
@@ -32,6 +33,7 @@ export default class NavigationBar extends React.Component {
 			links = (
 				<ul className="nav-ul">
 					<li><Link to={"/about"}>About</Link></li>
+					<li><Link to={"/search"}>Search</Link></li>
 					<li><Link to={"/notes"}>Notes</Link></li>
 				</ul>
 			)

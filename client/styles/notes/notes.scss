@@ -103,7 +103,7 @@
                 position: relative;
                 top: 27px;
 
-                button{
+                button {
                     margin-top: 15px;
                 }
             }
@@ -145,8 +145,20 @@
 }
 
 .single-note {
+    position: relative;
+    .edit-button{
+        position: absolute;
+        right: 5px;
+        bottom: 0px;
+        color: #448AFF;
+        font-weight: 300;
+        display: flex;
+        padding: 20px;
+        opacity: 0.6;
+        z-index: 100000;
+    }
 
-    em{
+    em {
         font-style: italic;
         opacity: 0.4;
     }
@@ -171,26 +183,10 @@
         margin-top: 10px;
         align-items: flex-start;
     }
-    .tags {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        flex-grow: 1;
-    }
+
     .created {
         font-size: 14px;
         margin-top: 18px;
-    }
-    .tags > div {
-        background-color: #448AFF;
-        padding: 5px 10px;
-        border-radius: 14px;
-        margin-right: 5px;
-        margin-top: 10px;
-        font-size: 15px;
-        opacity: 0.8;
-        color: white;
-        margin-bottom: 10px;
     }
 
     p {
@@ -217,5 +213,46 @@
 
     a {
         margin-top: 30px;
+    }
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-grow: 1;
+    > div {
+        background-color: #448AFF;
+        padding: 5px 10px;
+        border-radius: 14px;
+        margin-right: 5px;
+        margin-top: 10px;
+        font-size: 15px;
+        opacity: 0.8;
+        color: white;
+        margin-bottom: 10px;
+    }
+}
+
+.view-note {
+    width: 95%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    h1 {
+        color: #448AFF;
+        font-size: 50px;
+        margin-top: 100px;
+        font-weight: 900;
+        margin-bottom: 10px;
+    }
+    p {
+        margin-top: 30px;
+        font-size: 21px;
+        line-height: 29px;
+        font-weight: 300;
+        margin-bottom: 100px;
+        word-break: break-all;
     }
 }

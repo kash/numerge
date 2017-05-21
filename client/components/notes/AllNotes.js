@@ -28,7 +28,7 @@ export default class AllNotes extends React.Component {
 		if (this.props.notes != null && this.props.notes.length > 0) {
 			notes = [];
 			for (let note in this.props.notes) {
-				notes.push(<SingleNote info={this.props.notes[note]}/>)
+				notes.push(<SingleNote editable="true" info={this.props.notes[note]}/>)
 			}
 		}
 		return (

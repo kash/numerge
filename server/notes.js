@@ -73,8 +73,8 @@ let modifyNote = function () {
 
 let fetchSingleNote = function(){
 	app.post('/fetchSingleNote', function (req, res) {
-		let userid = req.body.userID
-		let sql = `SELECT id, title, text, uuid, tags, timecreated, public, draft FROM notes WHERE userid = ?`
+		let uuid = req.body.uuid
+		let sql = `SELECT id, title, text, uuid, tags, timecreated, public, draft FROM notes WHERE uuid = ?`
 		connection.query(sql, [userid], function (err, rows, fields) {
 			let output = [];
 			if (rows.length > 0) {
@@ -104,52 +104,17 @@ let makeNotePublic = function () {
 	app.post('/makeNotePublic', function (req, res) {
 		let noteid = req.body.id
 		let pub = req.body.public
-		let modTemp = new Date().getTime() / 1000;
-		//check public-ness first
 		if (pub) {
-			let sql = `SELECT linkto, id, text, title, tags, userid, timecreated FROM notes WHERE id = ?`
-			connection.query(sql, [noteid], function (err, rows, fields) {
-				let linkto = rows[0].linkto;
-				let id = rows[0].id;
-				let text = rows[0].text;
-				let title = rows[0].title;
-				let tags = rows[0].tags;
-				let userid = rows[0].userid;
-				let timecreated = rows[0].timecreated;
-
-				// never public before
-				if (linkto == null) {
-					sql = `INSERT INTO notes (text, title, tags, userid, timecreated, public, draft)
-                            VALUES(?, ?, ?, ?, ?, ?, ?)`
-					connection.query(sql, [text, title, tags, userid, timecreated, 1, 1])
-				} else {
-					sql = `DELETE FROM notes WHERE id = ?`
-					connection.query(sql, [linkto]);
-				}
-				sql = `INSERT INTO notes (userid, title, tags, text, draft, public, timecreated) VALUES (?, ?, ?, ?, ?)`
-				connection.query(sql, [userid, title, tags, text, 1, 1, timecreated], function (err, rows, fields) {
-					// get id of ^ that new note
-					sql = 'SELECT id, linkto FROM notes WHERE id = ? ORDER BY timecreated DESC'
-					connection.query(sql, [id], function (err, rows, fields) {
-						id = rows[0].id;
-						sql = `UPDATE notes SET linkto = ? WHERE id = ? ORDER BY timecreated DESC`
-						connection.query(sql, [id, id])
-					})
-				})
-			});
+			let sql = `UPDATE notes SET public = 1 WHERE id = ?`
+			connection.query(sql, [noteid]);
 		} else {
-			let sql = `SELECT public FROM notes WHERE id = ?`
-			connection.query(sql, [noteid], function (err, rows, field) {
-				let pub = rows[0].public;
-				if (pub == 1) {
-					sql = `DELETE FROM notes WHERE id = ?`
-					connection.query(sql, [noteid])
-				}
-			})
+			let sql = `UPDATE notes SET public = 0 WHERE id = ?`
+			connection.query(sql, [noteid]);
 		}
 		res.end();
 	})
 }
+
 module.exports = {
 	createNewNote: createNewNote(),
 	fetchAllUserNotes: fetchAllUserNotes(),

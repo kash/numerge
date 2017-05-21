@@ -30,6 +30,7 @@ export default class Search extends React.Component {
 				}else{
 					let output = [];
 					for (let i in response.data){
+						console.log(response.data[i]);
 						output.push(
 							<SingleNote info={response.data[i]}/>
 						)

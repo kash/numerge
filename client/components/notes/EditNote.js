@@ -20,7 +20,9 @@ export default class EditNote extends React.Component {
 			tags: "",
 			firstSave: false,
 			id: null,
-			timeout: null
+			timeout: null,
+			publicNote: false,
+			loaded: false
 		}
 	}
 
@@ -30,12 +32,14 @@ export default class EditNote extends React.Component {
 				for (let k in this.props.notes) {
 					let v = this.props.notes[k];
 					if (v['uuid'] === this.props.routeParams.uuid) {
+						console.log(v);
 						this.setState({
 							title: v['title'],
 							text: v['text'],
 							tags: v['tags'],
 							id: v['id'],
-							publicNote: v['public']
+							publicNote: v['publicNote'],
+							loaded: true
 						})
 						break;
 					}
@@ -83,6 +87,7 @@ export default class EditNote extends React.Component {
 			id: this.state.id,
 			public: e
 		})
+		console.log(e);
 	}
 
 	render() {
@@ -100,12 +105,15 @@ export default class EditNote extends React.Component {
 			)
 		}
 		let tags = this.state.tags;
-		let switchButton = (
-			<div className="new-note-switch">
-				<legend>Make Public</legend>
-				<Switch on="false" state={this.state.publicNote ? "on" : "off"} onChange={(e) => this.buttonSwitch(e)}/>
-			</div>
-		)
+		let switchButton = null;
+		if (this.state.loaded){
+			switchButton = (
+				<div className="new-note-switch">
+					<legend>Make Public</legend>
+					<Switch on={this.state.publicNote == 1 ? "on" : "off"} onChange={(e) => this.buttonSwitch(e)}/>
+				</div>
+			)
+		}
 		if (!this.state.firstSave && !this.props.routeParams.uuid) {
 			switchButton = null;
 		}
