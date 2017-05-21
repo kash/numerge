@@ -38,6 +38,7 @@ global.async = async;
 require('./login');
 require('./notes');
 require('./user');
+require('./search');
 
 /**
  * Serving client directory so that server has access to all JavaScript and CSS files.

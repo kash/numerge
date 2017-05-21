@@ -5,19 +5,33 @@ import React from 'react';
 export default class Login extends React.Component {
 	constructor() {
 		super();
-		this.state = {}
+		this.state = {
+			privateSwitch: false,
+			loaded: false
+		}
 	}
 
-	handleChange(key, value) {
+	flipSwitch(value){
 		this.setState({
-			[key]: value
+			[value]: !this.state[value]
 		})
+		this.props.onChange(!this.state[value]);
+	}
+
+	componentDidMount(){
+		if (this.props.state == 'on'){
+			this.setState({
+				privateSwitch: true
+			})
+		}
 	}
 
 	render() {
+		let name = "flip-switch" + (this.state.privateSwitch ? " flip-switch-on" : "");
+
 		return (
 			<button onClick={(e) => this.flipSwitch("privateSwitch")}
-					className={"flip-switch" + this.getSwitch("privateSwitch")}>
+					className={name}>
 				<div></div>
 			</button>
 		)

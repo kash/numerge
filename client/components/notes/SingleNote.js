@@ -25,7 +25,7 @@ export default class Login extends React.Component {
 		date = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
 
 		let tags = this.props.info.tags;
-		let tagsArray = tags.split(',');
+		let tagsArray = tags.split(' ');
 		let tagsOutput = [];
 		for (let s in tagsArray){
 			tagsOutput.push(
@@ -33,10 +33,22 @@ export default class Login extends React.Component {
 			)
 		}
 
+		if (tags.length == 0){
+			tagsOutput = null;
+		}
+
+		let title = <em>No Title</em>;
+		if (this.props.info.title.length > 0){
+			title = this.props.info.title;
+		}
+		if (this.props.info.text.length == 0){
+			text = <em>No note</em>;
+		}
+
 		return (
 			<Link to={"/notes/" + this.props.info.uuid} className="single-note">
 				<div className="first-line">
-					<h2>{this.props.info.title}</h2>
+					<h2>{title}</h2>
 				</div>
 				<div className="tags">
 					{tagsOutput}

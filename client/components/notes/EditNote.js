@@ -11,7 +11,7 @@ import Switch from './Switch';
 	}
 })
 
-export default class NewNote extends React.Component {
+export default class EditNote extends React.Component {
 	constructor() {
 		super();
 		this.state = {
