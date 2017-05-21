@@ -61,10 +61,7 @@ export default class Settings extends React.Component {
 						<div className="set-row">
 							<div className="set-set">
 								<legend>Private</legend>
-								<button onClick={(e) => this.flipSwitch("privateSwitch")}
-										className={"flip-switch" + this.getSwitch("privateSwitch")}>
-									<div></div>
-								</button>
+
 							</div>
 						</div>
 					</div>

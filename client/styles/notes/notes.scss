@@ -138,11 +138,14 @@
             .first-line {
                 display: flex;
                 flex-direction: row;
-                align-items: center;
+                margin-top: 10px;
+                align-items: flex-start;
             }
             .tags {
                 display: flex;
+                flex-wrap: wrap;
                 flex-direction: row;
+                flex-grow: 1;
             }
             .created{
                 font-size: 14px;
@@ -152,10 +155,12 @@
                 background-color: #448AFF;
                 padding: 5px 10px;
                 border-radius: 14px;
-                margin-left: 5px;
+                margin-right: 5px;
+                margin-top: 10px;
                 font-size: 15px;
                 opacity: 0.8;
                 color: white;
+                margin-bottom: 10px;
             }
 
             p {
@@ -165,6 +170,9 @@
 
             h2 {
                 color: #444;
+                max-width: 50%;
+                padding-right: 10px;
+                display: table;
                 margin-right: 10px;
                 opacity: 0.95;
                 font-size: 22px;

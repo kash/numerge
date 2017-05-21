@@ -161,5 +161,6 @@ let makeNotePublic = function () {
 module.exports = {
 	createNewNote: createNewNote(),
 	fetchAllUserNotes: fetchAllUserNotes(),
-	modifyNote: modifyNote()
+	modifyNote: modifyNote(),
+	makeNotePublic: makeNotePublic()
 }
