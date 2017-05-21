@@ -150,12 +150,19 @@
         position: absolute;
         right: 5px;
         bottom: 0px;
-        color: #448AFF;
-        font-weight: 300;
-        display: flex;
-        padding: 20px;
+        a, button{
+            color: #448AFF;
+            font-weight: 300;
+            padding: 20px;
+            float: left;
+            margin-left: 10px;
+        }
+        display: table;
         opacity: 0.6;
         z-index: 100000;
+
+        justify-content: space-between;
+        align-items: center;
     }
 
     em {
