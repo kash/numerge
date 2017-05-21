@@ -24,7 +24,6 @@ export default class Login extends React.Component {
 		})
 	}
 
-
 	sendRequest() {
 		axios.post('/userJoinRequest', {
 			email: this.state.email,
@@ -59,7 +58,9 @@ export default class Login extends React.Component {
 							   value={this.state.password}/>
 					</div>
 					<div>
-						<button className="common-button">Login</button>
+						<button className="common-button"
+								onClick={this.sendRequest()}
+						>Login</button>
 						<p className="already">Don't have an account? <Link to="/join">Join</Link>
 						</p>
 					</div>
