@@ -56,6 +56,7 @@ ReactDOM.render(
 				<IndexRoute component={Notes}/>
 				<Route path="/notes/new" component={NewNote}/>
 				<Route path="/notes/settings" component={Settings}/>
+				<Route path="/notes/:uuid" component={NewNote}/>
 			</Route>
 			<Route path="*" component={App} hideFooter="true">
 				<IndexRoute component={NotFound}/>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export function fetchAllUserNotes(userID) {
+export function fetchAllUserNotes(userID, callback = null) {
 	return function (dispatch) {
 		axios.post('/fetchAllUserNotes', {
 			userID: userID
@@ -9,6 +9,9 @@ export function fetchAllUserNotes(userID) {
 				type: "FETCH_ALL_USER_NOTES",
 				payload: response.data
 			})
+			if (callback != null){
+				callback();
+			}
 		})
 	}
 }
