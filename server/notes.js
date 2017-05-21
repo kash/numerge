@@ -104,6 +104,43 @@ let makeNotePublic = function () {
 	app.post('/makeNotePublic', function (req, res) {
 		let noteid = req.body.id
 		let pub = req.body.public
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+		if (pub){
+		    let sql = `SELECT public FROM notes WHERE id = ?`
+            connection.query(sql, [noteid], function(err, rows, fields){
+                priv = rows[0].public;
+                if (priv == 1){
+                    //do nothing
+                }else{
+                    sql = `UPDATE notes SET public = 1`
+                    connection.query(sql)
+                }
+            })
+        }else{
+            let sql = `SELECT public FROM notes WHERE id = ?`
+            connection.query(sql, [noteid], function(err, rows, fields){
+                priv = rows[0].public;
+                if (priv == 0){
+                    //do nothing
+                }else{
+                    sql = `UPDATE notes SET public = 0`
+                    connection.query(sql)
+                }
+            })
+        }
+    })
+}
+
+let noteViewsIncrement = function () {
+    app.use('/noteViewsIncrement', function(res, req) {
+        id = req.body.id
+        let sql = `UPDATE notes SET views = views + 1 WHERE id = ? `
+        connection.query(sql, [id])
+    })
+=======
+>>>>>>> server
 		if (pub) {
 			let sql = `UPDATE notes SET public = 1 WHERE id = ?`
 			connection.query(sql, [noteid]);
@@ -113,11 +150,14 @@ let makeNotePublic = function () {
 		}
 		res.end();
 	})
+>>>>>>> client
 }
 
 module.exports = {
-	createNewNote: createNewNote(),
-	fetchAllUserNotes: fetchAllUserNotes(),
-	modifyNote: modifyNote(),
-	makeNotePublic: makeNotePublic()
+
+    createNewNote: createNewNote(),
+    fetchAllUserNotes: fetchAllUserNotes(),
+    modifyNote: modifyNote(),
+    makeNotePublic: makeNotePublic()
+
 }

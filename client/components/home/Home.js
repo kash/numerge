@@ -5,7 +5,9 @@ export default class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			topDisplayText: "This is a note taking app. All it does, really, is this and that and machine learning lol bishass",
+			topDisplayText: "We believe that note taking shouldn't be a solitary action.  With Numerge, we made note" +
+			" taking collaborative. Search for topics that you want to learn about, and share your own notes on" +
+			" topics you've already noted. With Numerge, note taking has evolved!",
 			displayThis: ""
 		}
 	}
