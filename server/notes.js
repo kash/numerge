@@ -116,8 +116,6 @@ let makeNotePublic = function () {
 				let tags = rows[0].tags;
 				let userid = rows[0].userid;
 				let timecreated = rows[0].timecreated;
-
-<<<<<<< HEAD
                 // never public before
                 if (linkto == null) {
                     sql = `INSERT INTO notes (id, text, title, tags, userid, timecreated, public, draft)
@@ -150,40 +148,6 @@ let makeNotePublic = function () {
             })
         }
     })
-=======
-				// never public before
-				if (linkto == null) {
-					sql = `INSERT INTO notes (text, title, tags, userid, timecreated, public, draft)
-                            VALUES(?, ?, ?, ?, ?, ?, ?)`
-					connection.query(sql, [text, title, tags, userid, timecreated, 1, 1])
-				} else {
-					sql = `DELETE FROM notes WHERE id = ?`
-					connection.query(sql, [linkto]);
-				}
-				sql = `INSERT INTO notes (userid, title, tags, text, draft, public, timecreated) VALUES (?, ?, ?, ?, ?)`
-				connection.query(sql, [userid, title, tags, text, 1, 1, timecreated], function (err, rows, fields) {
-					// get id of ^ that new note
-					sql = 'SELECT id, linkto FROM notes WHERE id = ? ORDER BY timecreated DESC'
-					connection.query(sql, [id], function (err, rows, fields) {
-						id = rows[0].id;
-						sql = `UPDATE notes SET linkto = ? WHERE id = ? ORDER BY timecreated DESC`
-						connection.query(sql, [id, id])
-					})
-				})
-			});
-		} else {
-			let sql = `SELECT public FROM notes WHERE id = ?`
-			connection.query(sql, [noteid], function (err, rows, field) {
-				let pub = rows[0].public;
-				if (pub == 1) {
-					sql = `DELETE FROM notes WHERE id = ?`
-					connection.query(sql, [noteid])
-				}
-			})
-		}
-		res.end();
-	})
->>>>>>> client
 }
 
 let noteViewsIncrement = function () {
@@ -195,15 +159,10 @@ let noteViewsIncrement = function () {
 }
 
 module.exports = {
-<<<<<<< HEAD
+
     createNewNote: createNewNote(),
     fetchAllUserNotes: fetchAllUserNotes(),
     modifyNote: modifyNote(),
     makeNotePublic: makeNotePublic()
-=======
-	createNewNote: createNewNote(),
-	fetchAllUserNotes: fetchAllUserNotes(),
-	modifyNote: modifyNote(),
-	makeNotePublic: makeNotePublic()
->>>>>>> client
+
 }
