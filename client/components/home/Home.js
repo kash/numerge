@@ -77,7 +77,7 @@ export default class App extends React.Component {
 						<div>
 							<div className="center">
 								<h1>Not really sure what you're waiting for.</h1>
-								<Link to="/join" className="common-button">Join dawg</Link>
+								<Link to="/join" className="common-button">Join Now</Link>
 							</div>
 						</div>
 					</div>

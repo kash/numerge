@@ -75,7 +75,7 @@ let fetchSingleNote = function(){
 	app.post('/fetchSingleNote', function (req, res) {
 		let uuid = req.body.uuid
 		let sql = `SELECT id, title, text, uuid, tags, timecreated, public, draft FROM notes WHERE uuid = ?`
-		connection.query(sql, [userid], function (err, rows, fields) {
+		connection.query(sql, [uuid], function (err, rows, fields) {
 			let output = [];
 			if (rows.length > 0) {
 				for (let s in rows) {
@@ -104,9 +104,7 @@ let makeNotePublic = function () {
 	app.post('/makeNotePublic', function (req, res) {
 		let noteid = req.body.id
 		let pub = req.body.public
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
 		if (pub){
 		    let sql = `SELECT public FROM notes WHERE id = ?`
             connection.query(sql, [noteid], function(err, rows, fields){
@@ -134,30 +132,28 @@ let makeNotePublic = function () {
 }
 
 let noteViewsIncrement = function () {
-    app.use('/noteViewsIncrement', function(res, req) {
-        id = req.body.id
+    app.use('/noteViewsIncrement', function(req, res) {
+        let id = req.body.id
         let sql = `UPDATE notes SET views = views + 1 WHERE id = ? `
-        connection.query(sql, [id])
+        connection.query(sql, [id]);
+        res.end();
     })
-=======
->>>>>>> server
-		if (pub) {
-			let sql = `UPDATE notes SET public = 1 WHERE id = ?`
-			connection.query(sql, [noteid]);
-		} else {
-			let sql = `UPDATE notes SET public = 0 WHERE id = ?`
-			connection.query(sql, [noteid]);
-		}
+}
+
+let deleteNote = function(){
+	app.use('/deleteNote', function(req, res) {
+		let id = req.body.id
+		let sql = `DELETE FROM notes WHERE id = ?`
+		connection.query(sql, [id]);
 		res.end();
 	})
->>>>>>> client
 }
 
 module.exports = {
-
     createNewNote: createNewNote(),
     fetchAllUserNotes: fetchAllUserNotes(),
     modifyNote: modifyNote(),
-    makeNotePublic: makeNotePublic()
-
+    makeNotePublic: makeNotePublic(),
+	deleteNote: deleteNote(),
+	fetchSingleNote: fetchSingleNote()
 }

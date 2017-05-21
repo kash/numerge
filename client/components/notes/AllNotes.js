@@ -18,7 +18,11 @@ export default class AllNotes extends React.Component {
 	render() {
 		let notes = (
 			<div className="empty-notes">
-				<p>No notes here :(</p>
+				<div>
+					<img src="/client/images/milk.svg" alt=""/>
+					<p>You don't have any notes!</p>
+
+				</div>
 
 				<Link to="/notes/new" className="common-button">
 					Create a Note

@@ -45,14 +45,9 @@ export default class Login extends React.Component {
 		}
 
 		let edit = (
-			<div className="edit-button">
-				<Link to={"/notes/" + this.props.info.uuid} className="edit-button">
-					Edit Note
-				</Link>
-				<button className="delete-button">
-					Delete Note
-				</button>
-			</div>
+			<Link to={"/notes/" + this.props.info.uuid} className="edit-button">
+				Edit Note
+			</Link>
 
 		)
 		if (!this.props.editable){

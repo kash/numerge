@@ -69,7 +69,6 @@ export default class Join extends React.Component {
 							break;
 
 					}
-					console.log(response);
 				}.bind(this));
 			} else {
 				this.setState({error: "Passwords do not match"});

@@ -22,7 +22,23 @@ export default class EditNote extends React.Component {
 			id: null,
 			timeout: null,
 			publicNote: false,
-			loaded: false
+			loaded: false,
+			reallyDelete: false
+		}
+	}
+	
+	deleteNote(){
+		if (this.state.reallyDelete){
+			this.setState({
+				reallyDelete: true
+			})
+		}else{
+			let id = this.state.id;
+			axios.post("/deleteNote", {
+				id: id
+			}).then(function(){
+				window.location.href = "/notes";
+			});
 		}
 	}
 
@@ -32,7 +48,6 @@ export default class EditNote extends React.Component {
 				for (let k in this.props.notes) {
 					let v = this.props.notes[k];
 					if (v['uuid'] === this.props.routeParams.uuid) {
-						console.log(v);
 						this.setState({
 							title: v['title'],
 							text: v['text'],
@@ -87,7 +102,6 @@ export default class EditNote extends React.Component {
 			id: this.state.id,
 			public: e
 		})
-		console.log(e);
 	}
 
 	render() {
@@ -118,6 +132,15 @@ export default class EditNote extends React.Component {
 			switchButton = null;
 		}
 
+		let del = (
+			<button className="delete-button common-button" onClick={this.deleteNote.bind(this)}>Delete note</button>
+		)
+		if (this.state.reallyDelete){
+			del = (
+				<button className="delete-button common-button" onClick={this.deleteNote.bind(this)}>I really want to delete this note</button>
+			)
+		}
+
 		return (
 			<div className="new-note notes">
 				<div className="first-line">
@@ -129,6 +152,7 @@ export default class EditNote extends React.Component {
 				<textarea onChange={(e) => this.handleChange("text", e.target.value)}
 						  value={this.state.text}
 						  placeholder="Note"></textarea>
+				{del}
 			</div>
 		)
 	}

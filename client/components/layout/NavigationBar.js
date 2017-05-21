@@ -27,7 +27,6 @@ export default class NavigationBar extends React.Component {
 				<li><Link to={"/join"}>Join</Link></li>
 			</ul>
 		);
-		console.log(this.props.info);
 
 		if (!this.props.info.error) {
 			links = (

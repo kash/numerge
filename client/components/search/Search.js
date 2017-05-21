@@ -7,30 +7,44 @@ export default class Search extends React.Component {
 		super();
 		this.state = {
 			search: "",
-			output: []
+			output:  (
+				<div className="search-empty">
+					<img src="/client/images/search-empty.svg" alt=""/>
+					<p><strong>Did you know:</strong> You're awesome</p>
+				</div>
+			)
 		}
 	}
 
-	handleChange(key, value){
+	handleChange(key, value) {
 		this.setState({
 			[key]: value
 		});
-		if (!value){
+		if (!value) {
 			this.setState({
-				output: null
+				output: (
+					<div className="search-empty">
+						<img src="/client/images/search-empty.svg" alt=""/>
+						<p><strong>Did you know:</strong> You're awesome</p>
+					</div>
+				)
 			})
-		}else{
+		} else {
 			axios.post('/requestSearch', {
 				search: value
-			}).then(function(response){
-				if (response.data.empty){
+			}).then(function (response) {
+				if (response.data.empty) {
 					this.setState({
-						output: null
+						output: (
+							<div className="search-empty">
+								<img src="/client/images/search-empty.svg" alt=""/>
+								<p><strong>Did you know:</strong> You're awesome</p>
+							</div>
+						)
 					})
-				}else{
+				} else {
 					let output = [];
-					for (let i in response.data){
-						console.log(response.data[i]);
+					for (let i in response.data) {
 						output.push(
 							<SingleNote info={response.data[i]}/>
 						)
