@@ -1,85 +1,48 @@
-//Collect user info
-//id
-//email
-//joined
-//uuid
-
-var cookieParser = require('cookie-parser')
-http = require('http');
-let passwordHash = require('password-hash');
-let mysql = require('mysql');
-
+/**
+ * Fetches information about user
+ */
 let fetchUserInformation = function () {
-    app.post('/fetchUserInformation', function (req, res) {
+	app.post('/fetchUserInformation', function (req, res) {
+		let user = req.body.userID;
 
-        let userID = req.body.userID
-        if (userID == null) {
-            let cookie = req.cookies("uuid")
-            if (cookie == null) {
-                res.json({
-                    error: true
-                })
-            } else {
-                let sql = `SELECT username, joined, uuid, location, bio, 
-                firstname, lastname FROM users WHERE uuid = ?`
+		let sql = `SELECT id, username, joined, uuid, location, bio, 
+                firstname, lastname FROM users WHERE id = ?`;
 
-                connection.query(sql, cookie, function (err, rows, field) {
-                    let dbcookie = rows[0].uuid
-                    if (dbcookie === cookie) {
-                        username = rows[0].username
-                        email = rows[0].email
-                        joined = rows[0].joined
-                        firstname = rows[0].firstname
-                        lastname = rows[0].lastname
-                        uuid = rows[0].uuid
-                        bio = rows[0].bio
-                        location = rows[0].location
+		if (user == null) {
+			sql = `SELECT id, username, joined, uuid, location, bio, 
+                firstname, lastname FROM users WHERE uuid = ?`;
+		}
+		if (req.cookies("uuid") != null) {
+			res.json({
+				error: true
+			});
+			res.end();
+		} else {
+			user = req.cookies("uuid");
+		}
 
-                        res.json({
-                            username: username,
-                            email: email,
-                            fistname: firstname,
-                            lastname: lastname,
-                            joined: joined,
-                            uuid: uuid,
-                            location: location,
-                            bio: bio,
-                        })
-                    } else {
-                        res.json({
-                            error: true
-                        })
-                    }
-                })
-            }
-        } else {
-            let sql = `SELECT email, username, joined, uuid, location, bio, 
-                firstname, lastname FROM users WHERE userid = ?`
-            connection.query(sql, [userID], function (err, rows, field) {
-                username = rows[0].username
-                email = rows[0].email
-                joined = rows[0].joined
-                firstname = rows[0].firstname
-                lastname = rows[0].lastname
-                uuid = rows[0].uuid
-                bio = rows[0].bio
-                location = rows[0].location
-
-                res.json({
-                    username: username,
-                    email: email,
-                    fistname: firstname,
-                    lastname: lastname,
-                    joined: joined,
-                    uuid: uuid,
-                    location: location,
-                    bio: bio,
-                })
-            })
-        }
-    });
+		connection.query(sql, [user], function (err, rows, field) {
+			if (rows[0].email != null) {
+				res.json({
+					id: rows[0].id,
+					username: rows[0].username,
+					email: rows[0].email,
+					fistname: rows[0].firstname,
+					lastname: rows[0].lastname,
+					joined: rows[0].joined,
+					uuid: rows[0].uuid,
+					location: rows[0].location,
+					bio: rows[0].bio,
+				});
+			} else {
+				res.json({
+					error: true
+				})
+			}
+		});
+	});
 }
 
 module.exports = {
-    fetchUserInformation: fetchUserInformation()
+	fetchUserInformation: fetchUserInformation()
 }

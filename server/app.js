@@ -10,7 +10,6 @@ const async = require('async');
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
-app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}));
 
 /**
@@ -34,7 +33,9 @@ global.async = async;
  * All server files end up in here, hence the require(...) Variables app and connection
  * are passed here. Usually, app is always passed.
  */
-// require('./something');
+require('./login');
+require('./notes');
+require('./user.js');
 
 /**
  * Serving client directory so that server has access to all JavaScript and CSS files.
