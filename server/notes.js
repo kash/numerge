@@ -33,7 +33,7 @@ let createNewNote = function () {
 let fetchAllUserNotes = function () {
 	app.post('/fetchAllUserNotes', function (req, res) {
 		let userid = req.body.userID
-		let sql = `SELECT id, title, text, uuid, tags, timecreated FROM notes WHERE userid = ?`
+		let sql = `SELECT id, title, text, uuid, tags, timecreated, public, draft FROM notes WHERE userid = ?`
 		connection.query(sql, [userid], function (err, rows, fields) {
 			let output = [];
 			if (rows.length > 0) {
@@ -45,7 +45,9 @@ let fetchAllUserNotes = function () {
 						text: i['text'],
 						tags: i['tags'],
 						uuid: i['uuid'],
-						timecreated: i['timecreated']
+						timecreated: i['timecreated'],
+						publicNote: i['public'],
+						draft: i['draft']
 					}
 					output.push(temp);
 				}
@@ -73,7 +75,7 @@ let makeNotePublic = function () {
 	app.post('/makeNotePublic', function (req, res) {
 		let noteid = req.body.id
 		let pub = req.body.public
-		modTemp = new Date().getTime() / 1000;
+		let modTemp = new Date().getTime() / 1000;
 		//check public-ness first
 		if (pub) {
 			let sql = `SELECT linkto, id, text, title, tags, userid, timecreated FROM notes WHERE id = ?`
@@ -88,25 +90,24 @@ let makeNotePublic = function () {
 
 				// never public before
 				if (linkto == null) {
-					sql = `INSERT INTO notes (id, text, title, tags, userid, timecreated, public, draft)
-                            VALUES(?, ?, ?, ?, ?, ?, ?, ?)`
-					connection.query(sql, [id, text, title, tags, userid, timecreated, 1, 1])
+					sql = `INSERT INTO notes (text, title, tags, userid, timecreated, public, draft)
+                            VALUES(?, ?, ?, ?, ?, ?, ?)`
+					connection.query(sql, [text, title, tags, userid, timecreated, 1, 1])
 				} else {
 					sql = `DELETE FROM notes WHERE id = ?`
 					connection.query(sql, [linkto]);
 				}
 				sql = `INSERT INTO notes (userid, title, tags, text, draft, public, timecreated) VALUES (?, ?, ?, ?, ?)`
-				connection.query(sql, [id, title, tags, text, 1, 1, timecreated], function (err, rows, fields) {
+				connection.query(sql, [userid, title, tags, text, 1, 1, timecreated], function (err, rows, fields) {
 					// get id of ^ that new note
 					sql = 'SELECT id, linkto FROM notes WHERE id = ? ORDER BY timecreated DESC'
 					connection.query(sql, [id], function (err, rows, fields) {
 						id = rows[0].id;
-						sql = `UPDATE notes SET linkto = ? WHERE id = ? OmRDER BY timecreated DESC`
+						sql = `UPDATE notes SET linkto = ? WHERE id = ? ORDER BY timecreated DESC`
 						connection.query(sql, [id, id])
 					})
 				})
 			});
-
 		} else {
 			let sql = `SELECT public FROM notes WHERE id = ?`
 			connection.query(sql, [noteid], function (err, rows, field) {
@@ -115,9 +116,9 @@ let makeNotePublic = function () {
 					sql = `DELETE FROM notes WHERE id = ?`
 					connection.query(sql, [noteid])
 				}
-
 			})
 		}
+		res.end();
 	})
 }
 module.exports = {

@@ -1,26 +1,28 @@
 import React from 'react';
 import Result from './Result';
+import axios from 'axios';
 
 export default class Search extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			search: ""
+			search: "",
+			output: []
 		}
 	}
 
 	handleChange(key, value){
 		this.setState({
 			[key]: value
+		});
+		axios.post('/requestSearch', {
+			search: value
+		}).then(function(response){
+			console.log(response);
 		})
 	}
 
 	render() {
-
-		let output = [];
-		for (let i = 0; i < 5; i++){
-			output.push(<Result/>);
-		}
 
 		return (
 			<div className="search">
@@ -33,7 +35,7 @@ export default class Search extends React.Component {
 					</div>
 				</div>
 				<div className="search-results">
-					{output}
+					{this.state.output}
 				</div>
 			</div>
 		)

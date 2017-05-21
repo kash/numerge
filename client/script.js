@@ -23,6 +23,7 @@ import Join from './components/login/Join';
 // NOTES
 import Notes from './components/notes/AllNotes';
 import NewNote from './components/notes/NewNote';
+import EditNote from './components/notes/EditNote';
 import NotesLayout from './components/notes/NotesLayout';
 import Settings from './components/notes/Settings';
 
@@ -49,14 +50,14 @@ ReactDOM.render(
 			<Route path="/join" component={App} appClassName="login-wrapper" hideNav="true" hideFooter="true">
 				<IndexRoute component={Join}/>
 			</Route>
-			<Route path="/search" component={App} appClassName="search-wrapper" whiteNav="true">
+			<Route path="/search" component={App} appClassName="search-wrapper" whiteNav="true" hideFooter="true">
 				<IndexRoute component={Search}/>
 			</Route>
 			<Route path="/notes" component={NotesLayout} appClassName="notes-wrapper">
 				<IndexRoute component={Notes}/>
 				<Route path="/notes/new" component={NewNote}/>
 				<Route path="/notes/settings" component={Settings}/>
-				<Route path="/notes/:uuid" component={NewNote}/>
+				<Route path="/notes/:uuid" component={EditNote}/>
 			</Route>
 			<Route path="*" component={App} hideFooter="true">
 				<IndexRoute component={NotFound}/>

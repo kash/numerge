@@ -3,29 +3,12 @@ import React from 'react';
 export default class Settings extends React.Component {
 	constructor() {
 		super();
-		this.state = {
-			privateSwitch: false
-		}
 	}
 
 	handleChange(key, value){
 		this.setState({
 			[key]: value
 		})
-	}
-
-	flipSwitch(value){
-		this.setState({
-			[value]: !this.state[value]
-		})
-	}
-
-	getSwitch(value){
-		if (this.state[value]){
-			return " flip-switch-on";
-		}else{
-			return "";
-		}
 	}
 
 	render() {
