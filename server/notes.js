@@ -121,8 +121,15 @@ let makeNotePublic = function () {
     })
 }
 module.exports = {
+<<<<<<< HEAD
     createNewNote: createNewNote(),
     fetchAllUserNotes: fetchAllUserNotes(),
     modifyNote: modifyNote(),
     makeNotePublic: makeNotePublic()
+=======
+	createNewNote: createNewNote(),
+	fetchAllUserNotes: fetchAllUserNotes(),
+	modifyNote: modifyNote(),
+	makeNotePublic: makeNotePublic()
+>>>>>>> client
 }

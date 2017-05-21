@@ -42,7 +42,17 @@ export default class NewNote extends React.Component {
 		}.bind(this)));
 	}
 
+	convertToTags(){
+
+	}
+
 	handleChange(key, value) {
+		if (key == 'tags'){
+			if (value.indexOf(' ' > -1)){
+
+			}
+		}
+
 		clearTimeout(this.state.timeout);
 		this.setState({
 			[key]: value,
@@ -91,13 +101,16 @@ export default class NewNote extends React.Component {
 			)
 		}
 
-		let tags = this.state.tags
+		let tags = this.state.tags;
 
 		return (
 			<div className="new-note notes">
 				{header}
 				<input value={this.state.title} placeholder="Title" type="text" onChange={(e) => this.handleChange("title", e.target.value)}/>
-				<input value={this.state.tags} placeholder="Tags" type="text" onChange={(e) => this.handleChange("tags", e.target.value)}/>
+				<div className="tag-input">
+					{tags}
+					<input value={this.state.tags} placeholder="Tags" type="text" onChange={(e) => this.handleChange("tags", e.target.value)}/>
+				</div>
 				<textarea onChange={(e) => this.handleChange("text", e.target.value)}
 						  value={this.state.text}
 						  placeholder="Note"></textarea>
