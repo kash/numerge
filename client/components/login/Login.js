@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
+import axios from 'axios';
 
 @connect(function (store) {
 	return {
@@ -14,7 +15,8 @@ export default class Login extends React.Component {
 		super();
 		this.state = {
 			email: "",
-			password: ""
+			password: "",
+			error: ""
 		}
 	}
 
@@ -25,20 +27,34 @@ export default class Login extends React.Component {
 	}
 
 	sendRequest() {
-		axios.post('/userJoinRequest', {
+		axios.post('/userLoginRequest', {
 			email: this.state.email,
 			password: this.state.password
 		}).then(function (response) {
-			console.log(response.data);
-		})
+			if (response.data.error){
+				this.setState({
+					error: "Invalid login"
+				})
+			}else{
+				browserHistory.push('/notes');
+			}
+		}.bind(this))
 	}
 
 	render() {
 		if (Object.keys(this.props.info).length > 0) {
-			if (this.props.user.info.error) {
+			if (!this.props.info.error) {
 				browserHistory.push('/notes');
 			}
 		}
+
+		let displayError = {display: false};
+		if (this.state.error) {
+			displayError = {
+				display: true
+			}
+		}
+
 		return (
 			<div className="login">
 				<div className="login-box">
@@ -56,10 +72,11 @@ export default class Login extends React.Component {
 						<input type="password"
 							   onChange={(e) => this.handleChange("password", e.target.value)}
 							   value={this.state.password}/>
+						<p className="login-error" style={displayError}>{this.state.error}</p>
 					</div>
 					<div>
 						<button className="common-button"
-								onClick={this.sendRequest()}
+								onClick={this.sendRequest.bind(this)}
 						>Login</button>
 						<p className="already">Don't have an account? <Link to="/join">Join</Link>
 						</p>

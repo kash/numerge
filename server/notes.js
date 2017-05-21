@@ -10,8 +10,8 @@ let createNewNote = function () {
 		let timeCreated = new Date().getTime() / 1000;
 
 		connection.query(sql, [userid, title, tags, text, timeCreated], function (err, rows, fields) {
-			sql = `SELECT id FROM notes WHERE userid = ? ORDER BY timecreated DESC`;
 
+			sql = `SELECT id FROM notes WHERE userid = ? ORDER BY timecreated DESC LIMIT 1`;
 			connection.query(sql, [userid], function (err, rows, fields) {
 				res.json({
 					id: rows[0].id

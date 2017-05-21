@@ -7,8 +7,10 @@ const app = express();
 const path = require('path');
 const mysql = require('mysql');
 const async = require('async');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -35,7 +37,7 @@ global.async = async;
  */
 require('./login');
 require('./notes');
-require('./user.js');
+require('./user');
 
 /**
  * Serving client directory so that server has access to all JavaScript and CSS files.

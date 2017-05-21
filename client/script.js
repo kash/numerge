@@ -43,10 +43,10 @@ ReactDOM.render(
 			<Route path="/about" component={App} appClassName="about-wrapper">
 				<IndexRoute component={About}/>
 			</Route>
-			<Route path="/login" component={App} appClassName="login-wrapper" hideNav="true">
+			<Route path="/login" component={App} appClassName="login-wrapper" hideNav="true" hideFooter="true">
 				<IndexRoute component={Login}/>
 			</Route>
-			<Route path="/join" component={App} appClassName="login-wrapper" hideNav="true">
+			<Route path="/join" component={App} appClassName="login-wrapper" hideNav="true" hideFooter="true">
 				<IndexRoute component={Join}/>
 			</Route>
 			<Route path="/search" component={App} appClassName="search-wrapper" whiteNav="true">
