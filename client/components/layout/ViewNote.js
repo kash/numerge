@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
+import {fetchUserInformation} from '../../actions/user';
 import {fetchAllUserNotes} from '../../actions/notes';
-import Switch from './Switch';
+import Tag from '../notes/Tag';
+
 
 @connect(function (store) {
 	return {
@@ -15,22 +17,14 @@ export default class EditNote extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			text: "",
 			title: "",
+			text: "",
 			tags: "",
-			firstSave: false,
-			id: null,
-			timeout: null
+			id: ""
 		}
 	}
 
 	componentWillMount() {
-		axios.post('/fetchSingleNote', {
-
-		}).then(function(response){
-
-		})
-
 		this.props.dispatch(fetchAllUserNotes(this.props.userInfo.id, function () {
 			if (this.props.routeParams.uuid && this.props.notes != null) {
 				for (let k in this.props.notes) {
@@ -52,17 +46,26 @@ export default class EditNote extends React.Component {
 
 	render() {
 
+		let tags = this.state.tags;
+		let tagsArray = tags.split(' ');
+		let tagsOutput = [];
+		for (let s in tagsArray){
+			tagsOutput.push(
+				<div>{tagsArray[s]}</div>
+			)
+		}
+
+		if (tags.length == 0){
+			tagsOutput = null;
+		}
+
 		return (
-			<div className="new-note notes">
-				<div className="first-line">
-					{header}
-					{switchButton}
+			<div className="view-note">
+				<h1>{this.state.title}</h1>
+				<div className="tags">
+					{tagsOutput}
 				</div>
-				<input value={this.state.title} placeholder="Title" type="text" onChange={(e) => this.handleChange("title", e.target.value)}/>
-				<input value={this.state.tags} placeholder="Tags" type="text" onChange={(e) => this.handleChange("tags", e.target.value)}/>
-				<textarea onChange={(e) => this.handleChange("text", e.target.value)}
-						  value={this.state.text}
-						  placeholder="Note"></textarea>
+				<p>{this.state.text}</p>
 			</div>
 		)
 	}

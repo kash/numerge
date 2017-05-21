@@ -73,8 +73,8 @@ let modifyNote = function () {
 
 let fetchSingleNote = function(){
 	app.post('/fetchSingleNote', function (req, res) {
-		let userid = req.body.userID
-		let sql = `SELECT id, title, text, uuid, tags, timecreated, public, draft FROM notes WHERE userid = ?`
+		let uuid = req.body.uuid
+		let sql = `SELECT id, title, text, uuid, tags, timecreated, public, draft FROM notes WHERE uuid = ?`
 		connection.query(sql, [userid], function (err, rows, fields) {
 			let output = [];
 			if (rows.length > 0) {
@@ -104,6 +104,7 @@ let makeNotePublic = function () {
 	app.post('/makeNotePublic', function (req, res) {
 		let noteid = req.body.id
 		let pub = req.body.public
+<<<<<<< HEAD
 		if (pub){
 		    let sql = `SELECT public FROM notes WHERE id = ?`
             connection.query(sql, [noteid], function(err, rows, fields){
@@ -136,6 +137,17 @@ let noteViewsIncrement = function () {
         let sql = `UPDATE notes SET views = views + 1 WHERE id = ? `
         connection.query(sql, [id])
     })
+=======
+		if (pub) {
+			let sql = `UPDATE notes SET public = 1 WHERE id = ?`
+			connection.query(sql, [noteid]);
+		} else {
+			let sql = `UPDATE notes SET public = 0 WHERE id = ?`
+			connection.query(sql, [noteid]);
+		}
+		res.end();
+	})
+>>>>>>> client
 }
 
 module.exports = {

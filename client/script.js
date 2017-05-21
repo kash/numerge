@@ -5,6 +5,7 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 // LAYOUT
 import App from './components/layout/App.js';
 import NotFound from './components/layout/NotFound';
+import ViewNote from './components/layout/ViewNote';
 
 // HOME
 import Home from './components/home/Home';
@@ -46,6 +47,10 @@ ReactDOM.render(
 			</Route>
 			<Route path="/login" component={App} appClassName="login-wrapper" hideNav="true" hideFooter="true">
 				<IndexRoute component={Login}/>
+			</Route>
+			<Route path="/note" component={App} appClassName="note-wrapper">
+				<IndexRoute component={NotFound}/>
+				<Route path="/note/:uuid" component={ViewNote}/>
 			</Route>
 			<Route path="/join" component={App} appClassName="login-wrapper" hideNav="true" hideFooter="true">
 				<IndexRoute component={Join}/>
