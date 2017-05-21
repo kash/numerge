@@ -1,6 +1,4 @@
 import React from 'react';
-import NavigationBar from './NavigationBar';
-import Footer from './Footer';
 
 export default class NotFound extends React.Component {
 	constructor() {
@@ -8,17 +6,13 @@ export default class NotFound extends React.Component {
 	}
 
 	render() {
-		let route = this.props.route;
-		let nav = route.hideNav ? null : <NavigationBar/>;
-		let footer = route.hideFooter ? null : <Footer/>;
-		if (route.whiteNav){
-			nav = <NavigationBar whiteNav="true"/>
-		}
 		return (
-			<div className={this.props.route.appClassName}>
-				{nav}
-				{this.props.children}
-				{footer}
+			<div className="fourzerofour">
+				<div>
+					<h1>Oh no!</h1>
+					<h2>This page doesn't exist! Here are some plates.</h2>
+					<img src="/client/images/plates.svg" alt=""/>
+				</div>
 			</div>
 		)
 	}
