@@ -71,7 +71,7 @@ let modifyNote = function () {
 	})
 }
 
-let fetchSingleNote = function(){
+let fetchSingleNote = function () {
 	app.post('/fetchSingleNote', function (req, res) {
 		let uuid = req.body.uuid
 		let sql = `SELECT id, title, text, uuid, tags, timecreated, public, draft FROM notes WHERE uuid = ?`
@@ -104,82 +104,56 @@ let makeNotePublic = function () {
 	app.post('/makeNotePublic', function (req, res) {
 		let noteid = req.body.id
 		let pub = req.body.public
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
-		if (pub){
-		    let sql = `SELECT public FROM notes WHERE id = ?`
-            connection.query(sql, [noteid], function(err, rows, fields){
-                priv = rows[0].public;
-                if (priv == 1){
-                    //do nothing
-                }else{
-                    sql = `UPDATE notes SET public = 1`
-                    connection.query(sql)
-                }
-            })
-        }else{
-            let sql = `SELECT public FROM notes WHERE id = ?`
-            connection.query(sql, [noteid], function(err, rows, fields){
-                priv = rows[0].public;
-                if (priv == 0){
-                    //do nothing
-                }else{
-                    sql = `UPDATE notes SET public = 0`
-                    connection.query(sql)
-                }
-            })
-        }
-    })
+		if (pub) {
+			let sql = `SELECT public FROM notes WHERE id = ?`
+			connection.query(sql, [noteid], function (err, rows, fields) {
+				priv = rows[0].public;
+				if (priv == 1) {
+					//do nothing
+				} else {
+					sql = `UPDATE notes SET public = 1`
+					connection.query(sql)
+				}
+			})
+		} else {
+			let sql = `SELECT public FROM notes WHERE id = ?`
+			connection.query(sql, [noteid], function (err, rows, fields) {
+				priv = rows[0].public;
+				if (priv == 0) {
+					//do nothing
+				} else {
+					sql = `UPDATE notes SET public = 0`
+					connection.query(sql)
+				}
+			})
+		}
+	})
 }
 
 let noteViewsIncrement = function () {
-<<<<<<< Updated upstream
-    app.use('/noteViewsIncrement', function(req, res) {
-        let id = req.body.id
-        let sql = `UPDATE notes SET views = views + 1 WHERE id = ? `
-        connection.query(sql, [id]);
-        res.end();
-    })
+	app.use('/noteViewsIncrement', function (req, res) {
+		let id = req.body.id
+		let sql = `UPDATE notes SET views = views + 1 WHERE id = ? `
+		connection.query(sql, [id]);
+		res.end();
+	})
 }
 
-let deleteNote = function(){
-	app.use('/deleteNote', function(req, res) {
+let deleteNote = function () {
+	app.use('/deleteNote', function (req, res) {
 		let id = req.body.id
 		let sql = `DELETE FROM notes WHERE id = ?`
 		connection.query(sql, [id]);
-=======
-    app.use('/noteViewsIncrement', function(res, req) {
-        id = req.body.id
-        let sql = `UPDATE notes SET views = views + 1 WHERE id = ? `
-        connection.query(sql, [id])
-    })
-		if (pub) {
-			let sql = `UPDATE notes SET public = 1 WHERE id = ?`
-			connection.query(sql, [noteid]);
-		} else {
-			let sql = `UPDATE notes SET public = 0 WHERE id = ?`
-			connection.query(sql, [noteid]);
-		}
->>>>>>> Stashed changes
 		res.end();
+	})
 }
 
 module.exports = {
-<<<<<<< Updated upstream
-    createNewNote: createNewNote(),
-    fetchAllUserNotes: fetchAllUserNotes(),
-    modifyNote: modifyNote(),
-    makeNotePublic: makeNotePublic(),
+	createNewNote: createNewNote(),
+	fetchAllUserNotes: fetchAllUserNotes(),
+	modifyNote: modifyNote(),
+	makeNotePublic: makeNotePublic(),
 	deleteNote: deleteNote(),
 	fetchSingleNote: fetchSingleNote()
-=======
-
-    createNewNote: createNewNote(),
-    fetchAllUserNotes: fetchAllUserNotes(),
-    modifyNote: modifyNote(),
-    makeNotePublic: makeNotePublic()
-
->>>>>>> Stashed changes
 }
