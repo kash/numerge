@@ -9,13 +9,23 @@ We don't have any plans to actually put this site up, but feel free to download 
 ### Screenshots
 
 **Home Page**
+
 ![1](http://i.imgur.com/Sb4ouHf.png)
 
+<br>
+
 **Notes Page**
+
 ![2](http://i.imgur.com/mf2d7KR.png)
 
+<br>
+
 **Note View**
+
 ![3](http://i.imgur.com/QRtUnSa.png)
 
+<br>
+
 **Search Page**
+
 ![4](http://i.imgur.com/HXTYsRl.png)
